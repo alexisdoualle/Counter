@@ -11,22 +11,17 @@
 
       <ion-item-sliding *ngFor="let player of players; let i=index">
         <ion-item>
-
-
             {{player.prenomJoueur}}
+          <div item-end>
+            <span class="score">{{player.score}} &nbsp;</span>
+          </div>
 
 
-          <ion-card-content item-end>
-            <span class="score">{{player.score}}</span>
-          </ion-card-content>
-
-
-
-          <ion-card-content item-end class="plusMinus">
-            <button ion-button square  color="danger" (tap)="decrementer(i)" ><ion-icon name="remove"></ion-icon></button>
-            &nbsp;
+          <div item-end class="plusMinus">
+            <button ion-button square strong="true" color="danger" (tap)="decrementer(i)" ><ion-icon name="remove"></ion-icon></button>
+            <!-- &nbsp; -->
             <button ion-button square  (tap)="incrementer(i)" ><ion-icon name="add"></ion-icon></button>
-          </ion-card-content>
+          </div>
 
         </ion-item>
         <ion-item-options side="right">
@@ -38,7 +33,7 @@
       </ion-item-sliding>
     </ion-list>
     <ion-fab center bottom>
-      <button ion-fab (tap)="ajouterJoueur()"><ion-icon name="add"></ion-icon></button>
+      <button ion-fab mini (tap)="ajouterJoueur()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
 </ion-content>

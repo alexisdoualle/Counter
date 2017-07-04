@@ -16,7 +16,9 @@ export class HomePage {
                     {"prenomJoueur":"Matthias", "score":0},
                     {"prenomJoueur":"Hugo", "score":0},
                     {"prenomJoueur":"Paul", "score":0},
-                    {"prenomJoueur":"JB", "score":0}
+                    {"prenomJoueur":"JB", "score":0},
+                    {"prenomJoueur":"Blandine", "score":0},
+                    {"prenomJoueur":"Gaspard", "score":0},
                   ];
 
   }
