@@ -1,3 +1,40 @@
 page-home {
+  .home {
+    //background-color: black;
+  }
+  .toolbar {
+    color: white !important;
+  }
+  .toolbar-background {
+    background-color: #3C94BF;
+  }
+
+  ion-icon {
+    font-size: 1.8em;
+  }
+
+  ion-card-content {
+    padding:  0 ;
+  }
+
+  .score {
+    font-size: 1.6em;
+    color: black;
+    text-align: center;
+    //background-color: grey;
+  }
+
+  .plusMinus {
+    font-size: 1.6em;
+    color: black;
+    padding:  0 5px !important;
+    overflow: hidden;
+  }
+  .plusMinus button{
+    color: black;
+    margin: 0 !important;
+    margin-bottom: 10px !important;
+    color: white;
+  }
 
 }
