@@ -3,24 +3,41 @@
     <ion-title>
       Score
     </ion-title>
+    <ion-buttons start><ion-icon name="settings"></ion-icon></ion-buttons>
+    <ion-buttons end>
+      <button ion-button color="dark" (tap)="reorderBool=!reorderBool"><ion-icon name="reorder"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="home">
   <ion-list>
-
-      <ion-item-sliding *ngFor="let player of players; let i=index">
+    <ion-item-group [reorder]="reorderBool" (ionItemReorder)="reorderItems($event)" >
+      <ion-item-sliding *ngFor="let player of players; let i=index" class="reorder">
         <ion-item>
+          <div (press)="changerNom(i)">
             {{player.prenomJoueur}}
+          </div>
+
           <div item-end>
             <span class="score">{{player.score}} &nbsp;</span>
           </div>
 
-
           <div item-end class="plusMinus">
-            <button ion-button square strong="true" color="danger" (tap)="decrementer(i)" ><ion-icon name="remove"></ion-icon></button>
-            <!-- &nbsp; -->
-            <button ion-button square  (tap)="incrementer(i)" ><ion-icon name="add"></ion-icon></button>
+            <button ion-button
+                    square color="danger"
+                    (tap)="decrementer(i)"
+                    (press)="decrementerBeaucoup(i)">
+                    <ion-icon name="remove"></ion-icon>
+            </button>
+              <!-- &nbsp; -->
+            <button ion-button
+                    square
+                    color="primary"
+                    (tap)="incrementer(i)"
+                    (press)="incrementerBeaucoup(i)">
+                    <ion-icon name="add"></ion-icon>
+            </button>
           </div>
 
         </ion-item>
@@ -31,9 +48,16 @@
           </button>
         </ion-item-options>
       </ion-item-sliding>
+    </ion-item-group>
+    <ion-item>
+      Manche:
+    </ion-item>
     </ion-list>
     <ion-fab center bottom>
       <button ion-fab mini (tap)="ajouterJoueur()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+    <ion-fab right bottom>
+      <button ion-fab mini (tap)="ajouterJoueur()"><ion-icon name="arrow-forward"></ion-icon></button>
     </ion-fab>
 
 </ion-content>
