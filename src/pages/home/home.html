@@ -3,7 +3,11 @@
     <ion-title>
       Score
     </ion-title>
-    <ion-buttons start><ion-icon name="settings"></ion-icon></ion-buttons>
+    <ion-buttons start>
+      <button ion-button color="dark" (tap)="goToSettings()"><ion-icon name="settings"></ion-icon></button>
+      &nbsp;
+      <button ion-button color="dark" (tap)="goToHelp()"><ion-icon name="help"></ion-icon></button>
+    </ion-buttons>
     <ion-buttons end>
       <button ion-button color="dark" (tap)="reorderBool=!reorderBool"><ion-icon name="reorder"></ion-icon></button>
     </ion-buttons>
@@ -49,9 +53,6 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-item-group>
-    <ion-item>
-      Manche:
-    </ion-item>
     </ion-list>
     <ion-fab center bottom>
       <button ion-fab mini (tap)="ajouterJoueur()"><ion-icon name="add"></ion-icon></button>

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list text-wrap>
+    <ion-item>
+      <ion-label>Points en tapant:</ion-label>
+      <ion-input type="number" [value]="tapScoreIncrease"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Points en appuyant:</ion-label>
+      <ion-input type="number" placeholder="10"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="">Points réinitialisés à 0 à chaque tour</ion-label>
+      <ion-checkbox ></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label style="">autoriser les scores négatifs</ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>

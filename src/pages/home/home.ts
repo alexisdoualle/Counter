@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+
+import { SettingsPage } from '../settings/settings';
+import { HelpPage } from '../help/help';
+
+
 
 @Component({
   selector: 'page-home',
@@ -12,8 +17,11 @@ export class HomePage {
   public round: any;
   public reorderBool: any;
 
-  public tap: number = 0;
-  constructor(public alertCtrl: AlertController) {
+  @Input('tapScoreIncrease') tapScoreIncrease: number;
+
+  constructor(public alertCtrl: AlertController,
+              public navCtrl: NavController) {
+
     this.players = [{"prenomJoueur":"Alexis", "score":0},
                     {"prenomJoueur":"Matthias", "score":0},
                     {"prenomJoueur":"Hugo", "score":0},
@@ -25,6 +33,15 @@ export class HomePage {
     this.round = 0;
     this.reorderBool = false;
 
+  }
+
+  goToSettings() {
+    this.navCtrl.push(SettingsPage);
+  }
+
+  goToHelp() {
+    console.log("HelpPage");
+    this.navCtrl.push(HelpPage);
   }
 
   ajouterJoueur() {
@@ -91,7 +108,7 @@ export class HomePage {
   }
 
   incrementer(idJoueur) {
-    this.players[idJoueur].score += 1;
+    this.players[idJoueur].score += this.tapScoreIncrease;
   }
 
   incrementerBeaucoup(idJoueur) {
