@@ -17,7 +17,7 @@
 <ion-content padding class="home">
   <ion-list>
     <ion-item-group [reorder]="reorderBool" (ionItemReorder)="reorderItems($event)" >
-      <ion-item-sliding *ngFor="let player of players; let i=index" class="reorder">
+      <ion-item-sliding *ngFor="let player of scoreBoard; let i=index" class="reorder">
         <ion-item>
           <div (press)="changerNom(i)">
             {{player.prenomJoueur}}

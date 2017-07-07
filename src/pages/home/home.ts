@@ -5,34 +5,45 @@ import { AlertController } from 'ionic-angular';
 import { SettingsPage } from '../settings/settings';
 import { HelpPage } from '../help/help';
 
-
+import { ScoreProvider } from '../../providers/score/score';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
-
+  templateUrl: 'home.html',
+  providers: [ScoreProvider]
 })
 export class HomePage {
-  public players: any;
+  public scoreBoard: any;
+  public settings: any;
+
   public round: any;
   public reorderBool: any;
 
   @Input('tapScoreIncrease') tapScoreIncrease: number;
 
   constructor(public alertCtrl: AlertController,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              public scoreProvider: ScoreProvider) {
 
-    this.players = [{"prenomJoueur":"Alexis", "score":0},
-                    {"prenomJoueur":"Matthias", "score":0},
-                    {"prenomJoueur":"Hugo", "score":0},
-                    {"prenomJoueur":"Paul", "score":0},
-                    {"prenomJoueur":"JB", "score":0},
-                    {"prenomJoueur":"Blandine", "score":0},
-                    {"prenomJoueur":"Gaspard", "score":0},
-                  ];
+    this.getPlayers();
+    this.getSettings();
     this.round = 0;
     this.reorderBool = false;
 
+  }
+
+  getPlayers() {
+    this.scoreProvider.loadPlayers()
+    .then(data => {
+      this.scoreBoard = data;
+    })
+  }
+
+  getSettings() {
+    this.scoreProvider.loadSettings()
+    .then(data => {
+      this.settings = data;
+    })
   }
 
   goToSettings() {
@@ -64,7 +75,7 @@ export class HomePage {
        {
          text: 'Save',
          handler: data => {
-           this.players.push({"prenomJoueur":prompt.data.inputs[0].value, "score":0});
+           this.scoreBoard.push({"prenomJoueur":prompt.data.inputs[0].value, "score":0});
          }
        }
      ]
@@ -74,7 +85,7 @@ export class HomePage {
   }
 
   supprimerJoueur(idJoueur) {
-    this.players.splice(idJoueur,1);
+    this.scoreBoard.splice(idJoueur,1);
 
   }
 
@@ -98,7 +109,7 @@ export class HomePage {
        {
          text: 'Save',
          handler: data => {
-         this.players[idJoueur].prenomJoueur = prompt.data.inputs[0].value;
+         this.scoreBoard[idJoueur].prenomJoueur = prompt.data.inputs[0].value;
          }
        }
      ]
@@ -108,26 +119,26 @@ export class HomePage {
   }
 
   incrementer(idJoueur) {
-    this.players[idJoueur].score += this.tapScoreIncrease;
+    this.scoreBoard[idJoueur].score += this.settings.tapPoints;
   }
 
   incrementerBeaucoup(idJoueur) {
-    this.players[idJoueur].score += 10;
+    this.scoreBoard[idJoueur].score += this.settings.pressPoints;
   }
 
 
   decrementer(idJoueur) {
-    this.players[idJoueur].score -= 1;
+    this.scoreBoard[idJoueur].score -= this.settings.tapPoints;
   }
 
   decrementerBeaucoup(idJoueur) {
-    this.players[idJoueur].score -= 10;
+    this.scoreBoard[idJoueur].score -= this.settings.pressPoints;
   }
 
   reorderItems(indexes) {
-    let element = this.players[indexes.from];
-    this.players.splice(indexes.from, 1);
-    this.players.splice(indexes.to, 0, element);
+    let element = this.scoreBoard[indexes.from];
+    this.scoreBoard.splice(indexes.from, 1);
+    this.scoreBoard.splice(indexes.to, 0, element);
   }
 
 }
