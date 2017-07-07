@@ -25,9 +25,9 @@ export class ScoreProvider {
   loadPlayers() {
     this.players = [];
     return new Promise(resolve => {
-      this.storage.get("data")
+      this.storage.get("scoreBoard")
       .then(data => {
-          this.players = data.scoreBoard;
+          this.players = data;
           resolve(this.players);
       });
     });
@@ -36,32 +36,31 @@ export class ScoreProvider {
   loadSettings() {
     this.settings = [];
     return new Promise(resolve => {
-      this.storage.get("data")
+      this.storage.get("settings")
       .then(data => {
-          this.settings = data.settings;
+          this.settings = data;
           resolve(this.settings);
       });
     });
   }
 
   updateSettings(newSettings) {
+    return(
     this.platform.ready()
     .then((readySource) => {
-      this.storage.set("data", "true")
+      this.storage.set("settings", newSettings)
       .then(data => {
-        console.log("added: " + dt);
+        this.settings = newSettings;
       });
     })
-  }
+  )}
 
   initialize() {
     this.platform.ready()
     .then((readySource) =>{
-      this.storage.set("data", {scoreBoard: [{"prenomJoueur": "Aliosha", "score":0},
-                                          {"prenomJoueur": "Matthias", "score":0}],
-                                settings: {"tapPoints":2,
-                                           "pressPoints":11}
-                              })
+      this.storage.set("scoreBoard", [{"prenomJoueur": "Aliosha", "score":0},
+                                          {"prenomJoueur": "Matthias", "score":0}]);
+      this.storage.set("settings", {"tapPoints":1, "pressPoints":5})
     })
     .then(data => {
 

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ScoreProvider } from '../../providers/score/score';
 
+import { HomePage } from '../home/home';
+
 /**
  * Generated class for the SettingsPage page.
  *
@@ -23,6 +25,7 @@ export class SettingsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public scoreProvider: ScoreProvider) {
+
     this.getSettings();
 
   }
@@ -34,6 +37,17 @@ export class SettingsPage {
       this.tapScoreIncrease = this.settings.tapPoints;
       this.pressScoreIncrease = this.settings.pressPoints;
     })
+  }
+
+  updateSettings(tap, press) {
+    let tapInt = parseInt(tap);
+    let pressInt = parseInt(press);
+    let newSettings = {"tapPoints":tapInt, "pressPoints":pressInt};
+
+    this.scoreProvider.updateSettings(newSettings)
+    .then(data => {
+      console.log("tadaaa!");
+    });
   }
 
   ionViewDidLoad() {

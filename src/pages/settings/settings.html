@@ -8,11 +8,11 @@
   <ion-list text-wrap>
     <ion-item>
       <ion-label>Points en tapant:</ion-label>
-      <ion-input type="number" [value]="tapScoreIncrease"></ion-input>
+      <ion-input type="number" [(ngModel)]="tapScoreIncrease"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Points en appuyant:</ion-label>
-      <ion-input type="number" [value]="pressScoreIncrease"></ion-input>
+      <ion-input type="number" [(ngModel)]="pressScoreIncrease"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label style="">Points réinitialisés à 0 à chaque tour</ion-label>
@@ -23,7 +23,7 @@
       <ion-checkbox></ion-checkbox>
     </ion-item>
   </ion-list>
-  <button ion-button color="secondary" >
+  <button ion-button color="secondary" (tap)='updateSettings(tapScoreIncrease, pressScoreIncrease)'>
     Enregistrer
   </button>
 

@@ -9,8 +9,7 @@ import { ScoreProvider } from '../../providers/score/score';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html',
-  providers: [ScoreProvider]
+  templateUrl: 'home.html'
 })
 export class HomePage {
   public scoreBoard: any;
@@ -119,20 +118,20 @@ export class HomePage {
   }
 
   incrementer(idJoueur) {
-    this.scoreBoard[idJoueur].score += this.settings.tapPoints;
+    this.scoreBoard[idJoueur].score += this.scoreProvider.settings.tapPoints;
   }
 
   incrementerBeaucoup(idJoueur) {
-    this.scoreBoard[idJoueur].score += this.settings.pressPoints;
+    this.scoreBoard[idJoueur].score += this.scoreProvider.settings.pressPoints;
   }
 
 
   decrementer(idJoueur) {
-    this.scoreBoard[idJoueur].score -= this.settings.tapPoints;
+    this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.tapPoints;
   }
 
   decrementerBeaucoup(idJoueur) {
-    this.scoreBoard[idJoueur].score -= this.settings.pressPoints;
+    this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.pressPoints;
   }
 
   reorderItems(indexes) {
