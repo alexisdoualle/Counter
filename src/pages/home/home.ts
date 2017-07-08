@@ -18,8 +18,6 @@ export class HomePage {
   public round: any;
   public reorderBool: any;
 
-  @Input('tapScoreIncrease') tapScoreIncrease: number;
-
   constructor(public alertCtrl: AlertController,
               public navCtrl: NavController,
               public scoreProvider: ScoreProvider) {
@@ -54,7 +52,7 @@ export class HomePage {
     this.navCtrl.push(HelpPage);
   }
 
-  ajouterJoueur() {
+  addPlayer() {
     let prompt = this.alertCtrl.create({
      title: 'Nouveau joueur',
      message: "Entrez le prénom:",
@@ -74,13 +72,14 @@ export class HomePage {
        {
          text: 'Save',
          handler: data => {
+           // inclure une promesse?
            this.scoreBoard.push({"prenomJoueur":prompt.data.inputs[0].value, "score":0});
+           this.scoreProvider.updateScoreBoard(this.scoreBoard);
          }
        }
      ]
    });
    prompt.present();
-
   }
 
   supprimerJoueur(idJoueur) {
@@ -109,6 +108,7 @@ export class HomePage {
          text: 'Save',
          handler: data => {
          this.scoreBoard[idJoueur].prenomJoueur = prompt.data.inputs[0].value;
+         this.scoreProvider.updateScoreBoard(this.scoreBoard);
          }
        }
      ]
@@ -119,19 +119,23 @@ export class HomePage {
 
   incrementer(idJoueur) {
     this.scoreBoard[idJoueur].score += this.scoreProvider.settings.tapPoints;
+    this.scoreProvider.updateScoreBoard(this.scoreBoard);
   }
 
   incrementerBeaucoup(idJoueur) {
     this.scoreBoard[idJoueur].score += this.scoreProvider.settings.pressPoints;
+    this.scoreProvider.updateScoreBoard(this.scoreBoard);
   }
 
 
   decrementer(idJoueur) {
     this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.tapPoints;
+    this.scoreProvider.updateScoreBoard(this.scoreBoard);
   }
 
   decrementerBeaucoup(idJoueur) {
     this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.pressPoints;
+    this.scoreProvider.updateScoreBoard(this.scoreBoard);
   }
 
   reorderItems(indexes) {

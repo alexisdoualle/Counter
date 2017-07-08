@@ -4,12 +4,6 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 import { Platform } from 'ionic-angular';
 
-/*
-  Generated class for the ScoreProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class ScoreProvider {
   players: any;
@@ -32,6 +26,19 @@ export class ScoreProvider {
       });
     });
   }
+  // met à jour les joueurs et le score:
+  updateScoreBoard(newScoreBoard) {
+    return(
+      this.platform.ready()
+      .then((readySource) => {
+        this.storage.set("scoreBoard", newScoreBoard)
+        .then(data => {
+          console.log("maj scoreBoard");
+        });
+      })
+  )
+  }
+
   // pour les paramètres:
   loadSettings() {
     this.settings = [];
@@ -58,8 +65,8 @@ export class ScoreProvider {
   initialize() {
     this.platform.ready()
     .then((readySource) =>{
-      this.storage.set("scoreBoard", [{"prenomJoueur": "Aliosha", "score":0},
-                                          {"prenomJoueur": "Matthias", "score":0}]);
+      this.storage.set("scoreBoard", [{"prenomJoueur": "Player 1", "score":0},
+                                          {"prenomJoueur": "Player 2", "score":0}]);
       this.storage.set("settings", {"tapPoints":1, "pressPoints":5})
     })
     .then(data => {

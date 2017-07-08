@@ -5,12 +5,7 @@ import { ScoreProvider } from '../../providers/score/score';
 
 import { HomePage } from '../home/home';
 
-/**
- * Generated class for the SettingsPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-settings',
