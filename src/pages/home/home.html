@@ -4,6 +4,7 @@
       Score
     </ion-title>
     <ion-buttons start>
+      &nbsp;
       <button ion-button color="dark" (tap)="goToSettings()"><ion-icon name="settings"></ion-icon></button>
       &nbsp;
       <button ion-button color="dark" (tap)="goToHelp()"><ion-icon name="help"></ion-icon></button>
@@ -30,16 +31,16 @@
           <div item-end class="plusMinus">
             <button ion-button
                     square color="danger"
-                    (tap)="decrementer(i)"
-                    (press)="decrementerBeaucoup(i)">
+                    (tap)="changerScore(i, false, true)"
+                    (press)="changerScore(i, false, false)">
                     <ion-icon name="remove"></ion-icon>
             </button>
               <!-- &nbsp; -->
             <button ion-button
                     square
                     color="primary"
-                    (tap)="incrementer(i)"
-                    (press)="incrementerBeaucoup(i)">
+                    (tap)="changerScore(i, true, true)"
+                    (press)="changerScore(i, true, false)">
                     <ion-icon name="add"></ion-icon>
             </button>
           </div>

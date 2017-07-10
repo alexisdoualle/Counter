@@ -84,7 +84,7 @@ export class HomePage {
 
   supprimerJoueur(idJoueur) {
     this.scoreBoard.splice(idJoueur,1);
-
+    this.scoreProvider.updateScoreBoard(this.scoreBoard);
   }
 
   changerNom(idJoueur) {
@@ -117,26 +117,23 @@ export class HomePage {
 
   }
 
-  incrementer(idJoueur) {
-    this.scoreBoard[idJoueur].score += this.scoreProvider.settings.tapPoints;
-    this.scoreProvider.updateScoreBoard(this.scoreBoard);
+  changerScore(idJoueur: any, positif: Boolean, tap: Boolean) {
+    if(positif){
+      if(tap){
+        this.scoreBoard[idJoueur].score += this.scoreProvider.settings.tapPoints;
+      } else {
+        this.scoreBoard[idJoueur].score += this.scoreProvider.settings.pressPoints;
+      }
+    } else {
+      if(tap){
+        this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.tapPoints;
+      } else {
+        this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.pressPoints;
+      }
+    }
+
   }
 
-  incrementerBeaucoup(idJoueur) {
-    this.scoreBoard[idJoueur].score += this.scoreProvider.settings.pressPoints;
-    this.scoreProvider.updateScoreBoard(this.scoreBoard);
-  }
-
-
-  decrementer(idJoueur) {
-    this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.tapPoints;
-    this.scoreProvider.updateScoreBoard(this.scoreBoard);
-  }
-
-  decrementerBeaucoup(idJoueur) {
-    this.scoreBoard[idJoueur].score -= this.scoreProvider.settings.pressPoints;
-    this.scoreProvider.updateScoreBoard(this.scoreBoard);
-  }
 
   reorderItems(indexes) {
     let element = this.scoreBoard[indexes.from];
